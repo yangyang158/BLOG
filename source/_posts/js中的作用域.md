@@ -4,6 +4,44 @@ date: 2019-01-15 10:47:15
 tags:
 ---
 
+## var、let、const
+* var、函数 存在变量提升，并且 函数提升 优于 变量提升
+``` bash
+console.log(a);//function a(){}
+function a(){};
+var a = false;
+```
+* 全局作用域下使用 let 和 const 声明变量，变量并不会被挂载到 window 上
+``` bash
+console.log(window.a); // undefined
+var a = 1;
+let b = 1;
+const c = 1;
+console.log(window.a); // 1
+console.log(window.b); // undefined
+console.log(window.c); // undefined
+```
+
+* let、const 声明过的变量不能重复声明, var 会覆盖之前的变量值
+``` bash
+let a = 1;
+let a = 2;//VM1286:1 Uncaught SyntaxError: Identifier 'v' has already been declared
+
+var b = 1;
+var b = 2;//b = 2
+```
+
+为什么会存在变量提升呢, 原因是为了解决函数间互相调用的情况
+``` bash
+function test1() {
+    test2()
+}
+function test2() {
+    console.log(11)
+}
+test1();
+假如不存在提升这个情况，那么就实现不了上述的代码
+```
 
 ## 理解执行上下文和作用域
 * 作用域：基于函数，当定义函数的时候确定
@@ -134,3 +172,6 @@ var f = foo5.call({id: 1});
 f()()();//this指向{id: 1}  id为1
 f.call({id:5})()();//this指向{id:1}  id为1
 ```
+
+
+

@@ -65,16 +65,18 @@ tags:
 ## node版本管理及切换----Nodejs 版本管理器
     npm install -g n
     n latest    下载最近版本的node
-    n lts      下载最近最稳定的node
+    n lts       下载最近最稳定的node
     n ls        列出所有的node版本
     n  版本号    切换node 版本
 
 ## nrm 管理源---npm的镜像源管理工具
     npm install -g nrm
-    nrm ls          列出所有可切换的源
-    npm use taobao        切换镜像
+    nrm ls            列出所有可切换的源
+    nrm use taobao    切换镜像
+    nrm add 仓库名     添加仓库
 
 ## git 配置项（git 默认对文件名大小写不敏感 (不区分文件名大小写)）
-    原文链接： https://www.worldhello.net/gotgit/08-git-misc/030-case-insensitive.html
+[原文链接](https://www.worldhello.net/gotgit/08-git-misc/030-case-insensitive.html)
+
     git config --list    获取git的所有配置项
     git config core.ignorecase false     配置git 使其对文件名大小写敏感
