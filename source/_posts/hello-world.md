@@ -1,11 +1,11 @@
 ---
-title: Hello World
+title: hexo基本命令
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
 ## Quick Start
 
-### Create a new post
+### Create a new post 创建新页面
 
 ``` bash
 $ hexo new "My New Post"
@@ -13,7 +13,7 @@ $ hexo new "My New Post"
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
-### Run server
+### Run server 启动项目
 
 ``` bash
 $ hexo server
@@ -29,7 +29,7 @@ $ hexo generate
 
 More info: [Generating](https://hexo.io/docs/generating.html)
 
-### Deploy to remote sites
+### Deploy to remote sites 部署
 
 ``` bash
 $ hexo deploy
