@@ -42,6 +42,44 @@ tags:
         sudo yum -y install nodejs
         此命令会安装8版本中最高的那个版本
 
+##  碰到的问题
+1、linux 窗口 长时间 不动，就会自动中断
+解决: 使用pm2 [原文](http://www.cnblogs.com/zhongweiv/p/pm2.html#pm2_start)
+PM2 是一个带有负载均衡功能的 Node 应用的进程管理器。
+安装：npm install pm2 -g  --->软连接  
+``` bash
+pm2相关命令： 
+a、基本命令
+    //app.js页面
+    启动进程  pm2 start (node) app.js  //node 可以省略，如果是ts-node
+    启动进程  pm2 start ts-node app.js 
+    停止进程  pm2 stop app.js
+    删除进程  pm2 delete app.js
+    重载进程  pm2 reload app.js* 
+    重启进程  pm2 restart app.js
+    查看详情  pm2 show test
+    清除日志  pm2 flush
+    查看日志  pm2 log
+    命名进程  pm2 start app.js --name device-cloud
+    列出由PM2管理的所有进程信息      pm2 list
+    打开实时监视器去查看资源占用情况  pm2 monit
+b、运行多个项目——批量操作相关命令
+    全部重载 pm2 reload all
+    全部停止 pm2 stop all
+    全部重启 pm2 restart all
+    全部删除 pm2 delete all
+注意：reload可以做到0秒宕机加载新的代码，restart则是重新启动，生产环境中多用reload来完成代码更新
+c、集群——mode模式
+    开发环境中mode多以fork的方式启动，生产环境中多用cluster方式启动
+    pm2 start app.js -i 数字 --name test
+　　表示在后台以cluster方式运行test，数字表示要启动的工作线程的数量
+d、监听
+    这个项默认是disabled，可以通过如下命令开启
+    pm2 start app.js --name test --watch
+    用处：主要更新代码后，不用重载或重启项目即可以立即让更新的代码起作用
+    注意：适合在开发时用，可以省不少时间，生产环境下最好不要用
+```
+
 
 ## 常用命令
     1、ls       列出文件或文件目录
