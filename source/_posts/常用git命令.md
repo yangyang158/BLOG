@@ -75,6 +75,9 @@ tags:
     nrm use taobao    切换镜像
     nrm add 仓库名     添加仓库
 
+## 初始化package.json文件
+    npm init
+
 ## git 配置项（git 默认对文件名大小写不敏感 (不区分文件名大小写)）
 [原文链接](https://www.worldhello.net/gotgit/08-git-misc/030-case-insensitive.html)
 
