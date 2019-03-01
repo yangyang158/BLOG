@@ -21,6 +21,13 @@ tags:
     删除本地：git tag -d name
     删除远程：git push origin --delete tag  name
 
+## 暂存
+    将当前分支修改的内容放到缓存区中, 并会自动建立一个缓存的list集合：git stash
+    查看list集合下的所有缓存: git stash list
+    将编号x的缓存释放出来, 释放之后该缓存还存在于list中: git stash apply @{x} 
+    将当前分支的最后一次暂存的内容释放出来, 该缓存还存在于list中：git stash apply
+    将当前分支的最后一次暂存的内容释放出来, 该缓存会从list中删除：git stash pop
+
 ## 改变项目引用地址
     改变：git remote set-url origin 地址
     查看：git remote -v
@@ -58,6 +65,22 @@ tags:
     5. 把本地仓库中的文件同步到远程仓库中。其中master为远程仓库的分支名。
         git push -u origin master
 
+## git 配置项（git 默认对文件名大小写不敏感 (不区分文件名大小写)）
+[原文链接](https://www.worldhello.net/gotgit/08-git-misc/030-case-insensitive.html)
+
+    git config --list    获取git的所有配置项
+    git config core.ignorecase false     配置git 使其对文件名大小写敏感
+
+## 同步vscode配置项到其他电脑
+    一、上传配置到github
+        1. vscode 安装 Settings Sync 插件
+        2. 登陆GitHub 进入Settings\Developer settings\Personal access tokens 界面，点击 Generate new token, 输入 Token description, 勾选 gist, 点击 Generate token。
+        3. 复制生成的token，回到vscode，在任意界面按 Alt + Shift + U，在对话框中输入该token, 回车, 等待配置上传成功。
+        4. 在用户设置中可以查看, 打开 setting.json, 可以看到 sync.gist 字段。
+    二、在另一台电脑下载配置
+        1. 安装Settings Sync插件
+        2. 按快捷键Alt + Shift + d, 会弹出一个输入框, 输入之前保存下来的 sync.gist, 回车后将会自动下载之前上传的配置
+   
 ## 安装包
     把名字添加到dependencies：npm install XX --save
     把名字添加到devDependencies：npm install XX -D
@@ -77,9 +100,3 @@ tags:
 
 ## 初始化package.json文件
     npm init
-
-## git 配置项（git 默认对文件名大小写不敏感 (不区分文件名大小写)）
-[原文链接](https://www.worldhello.net/gotgit/08-git-misc/030-case-insensitive.html)
-
-    git config --list    获取git的所有配置项
-    git config core.ignorecase false     配置git 使其对文件名大小写敏感
