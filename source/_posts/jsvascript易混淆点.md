@@ -173,7 +173,7 @@ let newArr = arr.reduce(function(acc, item){
 console.log(newArr);//[2, 4, 6]
 ```
 
-## 获取字符串中出现最多的字符
+## 五、获取字符串中出现最多的字符
 ``` bash
 var str='13rtghgfds';
 var obj = {};
@@ -188,3 +188,39 @@ for(let i=0;i<=str.length-1;i++){
 }
 console.log('obj', obj) // {1: 1, 3: 1, d: 1, f: 1, g: 2, h: 1, r: 1, s: 1, t: 1}
 ```
+
+## 六、parseInt
+区别：parseFloat(string)
+定义：把一个字符串 解析为 十进制的整数
+用法：parseInt(str, [radix]), radix可选
+参数radix：
+1、表示要解析的数字的基数。该值介于 2 ~ 36 之间。
+2、如果它以 “0x” 或 “0X” 开头，将以 16 为基数, 将以0x之外的数解析为十进制。
+3、如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN。
+参数str：
+1、当传入非字符串时，会先将其转换为字符串。
+2、字符串转整数时 是一个一个字符依次转换的，遇到不能转为数字的字符，就终止转换，返回已经转换好的部分。
+3、当字符串的第一个字符不能转为数字时，则返回NaN。
+4、当 string 前面有空格，会先去除前面的空格。
+5、当参数 radix 的值为 0，或没有设置该参数时, 如果 string 以 0 开头，将以 8 为基数。
+6、当参数 radix 的值为 0，或没有设置该参数时, 如果 string 以 1 ~ 9 的数字开头，将以 10 为基础。
+
+
+``` bash
+字符串规则第2、6条: parseInt('12aa'); //12      
+字符串规则第3条:    parseInt('a12aa'); //NaN   
+字符串规则第4条:    parseInt(' 122 34'); //122  
+字符串规则第5条:    parseInt('012'); //10: 2*8^0+1*8^1
+``` 
+
+``` bash
+radix规则第1条: parseInt('12aa', 3); //5    '12aa'先转成12, 将 三进制 的12 转换成 十进制
+radix规则第1条: parseInt('1f', 16); //31     结果将 十六进制 的1f 转换成 十进制
+radix规则第3条: parseInt('0x10'); //16   结果将 十六进制 的10 转换成 十进制
+radix规则第4条: parseInt('12', 1); //NaN    
+radix规则第6条: parseInt('19'); //19  
+``` 
+
+
+
+

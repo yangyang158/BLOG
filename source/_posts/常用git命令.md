@@ -79,7 +79,7 @@ tags:
         4. 在用户设置中可以查看, 打开 setting.json, 可以看到 sync.gist 字段。
     二、在另一台电脑下载配置
         1. 安装Settings Sync插件
-        2. 按快捷键Alt + Shift + d, 会弹出一个输入框, 输入之前保存下来的 sync.gist, 回车后将会自动下载之前上传的配置
+        2. 按快捷键Alt + Shift + d, 会弹出一个输入框, 根据提示，先输入GitHub Token, 再输入GitHub Gist, 回车后将会自动下载之前上传的配置
    
 ## 安装包
     把名字添加到dependencies：npm install XX --save
