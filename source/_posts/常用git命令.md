@@ -33,6 +33,7 @@ tags:
     查看：git remote -v
 
 ## 共钥、私钥
+    检查SSH keys是否存在：ls -al ~/.ssh
     生成共钥：ssh-keygen -t rsa -C "邮箱"
     查看公钥：cat ~/.ssh/id_rsa.pub
     查看私钥：cat ~/.ssh/id_rsa

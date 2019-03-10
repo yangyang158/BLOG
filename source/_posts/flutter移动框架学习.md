@@ -5,6 +5,9 @@ tags:
 ---
 
 ## 一、flutter环境搭建(Mac版)
+
+### 认识
+Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。
 ##### 1、使用镜像
 由于在国内访问Flutter有时可能会受到限制，Flutter官方为中国开发者搭建了临时镜像，可以将如下环境变量加入到系统环境变量中。
 * 进入命令窗口
@@ -68,9 +71,9 @@ Xcode对Mac版本有要求，Xcode 9以上版本 需要Mac版本至少 10.13.2�
     Flutter插件： 支持Flutter开发工作流 (运行、调试、热重载等)。
     Dart插件： 提供代码分析 (输入代码时进行验证、代码补全等)。
 2、点击命令面板 ——> 输入flutter ——> 选择 Flutter：New Project ——> 输入项目名称，不能有大写
-3、在模拟器中进行调试
-    前提：在Android Studio中 点击VM acceleration, 添加模拟器
-    调试：现在Android Studio中打开模拟器，执行命令 flutter run
+3、安装模拟器并调试
+    点击右下角的 No Device，可以 安装模拟器
+    窗口里 执行命令 flutter run 调试，按 r 键 刷新
     获取设备列表：执行 flutter emulator
 
 ## 三、添加配置项
