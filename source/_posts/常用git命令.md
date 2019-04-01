@@ -34,9 +34,12 @@ tags:
 
 ## 共钥、私钥
     检查SSH keys是否存在：ls -al ~/.ssh
-    生成共钥：ssh-keygen -t rsa -C "邮箱"
+    生成共钥：ssh-keygen -t rsa -C "邮箱" / ssh-keygen
     查看公钥：cat ~/.ssh/id_rsa.pub
     查看私钥：cat ~/.ssh/id_rsa
+**注意1**：生成公钥时，按照默认提示要输入两次密码，但是如果输入了，每次操作操作git库时都要输入密码，所以选择不输入密码
+**注意2**：生成公钥时，报错 bash:ssh-keygen command not found，解决办法：配置系统环境变量Path, 添加ssh-keygen.exe的路径(默认在Git/usr/bin)
+
 
 ## 杀死进程
     查看占用端口：lsof -i tcp:8080
@@ -85,6 +88,9 @@ tags:
 ## 安装包
     把名字添加到dependencies：npm install XX --save
     把名字添加到devDependencies：npm install XX -D
+
+## 安装cnpm
+    npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 ## node版本管理及切换----Nodejs 版本管理器
     npm install -g n
