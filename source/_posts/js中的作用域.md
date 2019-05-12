@@ -22,7 +22,7 @@ console.log(window.b); // undefined
 console.log(window.c); // undefined
 ```
 
-* let、const 声明过的变量不能重复声明, var 会覆盖之前的变量值
+* const 声明过的变量不能重新赋值,let声明过的变量可以重新赋值, var可以重复声明变量，新声明的会覆盖之前的变量值
 ``` bash
 let a = 1;
 let a = 2;//VM1286:1 Uncaught SyntaxError: Identifier 'v' has already been declared
