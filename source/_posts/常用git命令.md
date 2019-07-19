@@ -31,6 +31,8 @@ tags:
 ## 改变项目引用地址
     改变：git remote set-url origin 地址
     查看：git remote -v
+    单个删除：git remote remove 地址
+    全部删除：git remote remove
 
 ## 共钥、私钥
     检查SSH keys是否存在：ls -al ~/.ssh
