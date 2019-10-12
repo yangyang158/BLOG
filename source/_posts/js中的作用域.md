@@ -136,7 +136,7 @@ const foo2 = ()=>{
         console.log(this === window)//foo2也是箭头函数，this为window。输出结果：true
     }
 }
-foo.call({a:1})()
+foo2.call({a:1})()
 ```
 
 * 箭头函数 如果包裹在函数中, 只取决包裹箭头函数的第一个普通函数的this
