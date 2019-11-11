@@ -109,3 +109,13 @@ tags:
 
 ## 初始化package.json文件
     npm init
+
+## npm set用来设置环境变量
+    npm set init-author-name 'Your name'
+    npm set init-author-email 'Your email'
+    npm set init-author-url 'http://yourdomain.com'
+    npm set init-license 'MIT'
+    面命令等于为 npm init 设置了默认值，以后执行 npm init 的时候，package.json 的作者姓名、邮件、主页、许可证字段就会自动写入预设的值。这些信息会存放在用户主目录的 ~/.npmrc文件，使得用户不用每个项目都输入。如果某个项目有不同的设置，可以针对该项目运行 npm config。
+
+## npm 清楚缓存
+    npm cache verify
