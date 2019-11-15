@@ -32,7 +32,7 @@ tags:
     改变：git remote set-url origin 地址
     查看：git remote -v
     单个删除：git remote remove 地址
-    全部删除：git remote remove
+    全部删除：git remote remove origin
 
 ## 共钥、私钥
     检查SSH keys是否存在：ls -al ~/.ssh
@@ -94,7 +94,7 @@ tags:
 ## 安装cnpm
     npm install -g cnpm --registry=https://registry.npm.taobao.org
 
-## node版本管理及切换----Nodejs 版本管理器
+## node版本管理及切换----Nodejs 版本管理器(mac)
     npm install -g n
     n latest    下载最近版本的node
     n lts       下载最近最稳定的node
@@ -103,9 +103,9 @@ tags:
 
 ## nrm 管理源---npm的镜像源管理工具
     npm install -g nrm
-    nrm ls            列出所有可切换的源
-    nrm use taobao    切换镜像
-    nrm add 仓库名     添加仓库
+    nrm ls                  列出所有可切换的源
+    nrm use taobao          切换镜像
+    nrm add 仓库名 地址     添加仓库
 
 ## 初始化package.json文件
     npm init
