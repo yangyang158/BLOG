@@ -10,6 +10,7 @@ tags:
     2、标签的属性值：v-bind:属性名(v-bind可以省略)
     eg：<p v-bind:title="message">热烈欢迎</p>
     eg：<p :title="message">热烈欢迎</p>
+    eg：<p :title="index === 0 ? '我是title' : ''">热烈欢迎</p>
 ## 二、条件渲染
     1、控制元素显示与隐藏: 使用v-if、v-else、v-else-if
     eg：
@@ -146,6 +147,16 @@ tags:
         })
     </script>
 ## 九、生命周期
+    beforeCreated —— 创建组件实例之前
+    created —— 创建组件实例
+    beforeMounted —— 组件挂载到页面之前
+    mounted —— 组件挂载到页面, 在此处虚拟的dom节点被替换成真实的dom节点, 并插入dom树中
+    beforeUpdated —— 组件更新之前
+    updated —— 组件更新
+    beforeDestoryed —— 组件销毁之前
+    destoryed —— 组件销毁
+    activated —— 组件被激活时调用
+    deactivated —— 组件被移除时调用
 ## 十、注册全局组件和局部组件
     注册：Vue.component(tagName, {
         // 声明 props集合
@@ -163,6 +174,27 @@ tags:
         ...
     })
     调用：<tagName></tagName>
+## 十一、组件之间的通信
+    1、父传子：
+        a、通过props——单向传递, 子组件不能修改
+        b、通过this.$children[0]字段 获取子组件的属性和方法
+        c、在子组件上声明ref, 通过this.$refs字段 获取子组件的属性和方法
+    2、子传父
+        a、通过$emit派发事件
+        b、通过this.$parent字段 获取父组件的属性和方法
+    3、隔代通信
+        $attrs可以获取父作用域传入的值(不包括props中的).
+        $listeners相当于父作用域的事件监听器
+    4、兄弟组件之间的通信
+        a、先子传父, 再父传子
+        b、借助中央事件总线
+            var bus = new Vue();
+            A组件发送事件: bus.$emit('test', '我是A组件');
+            B组件监听: bus.$on('test', (params)=> {});
+    5、嵌套很深的组件之间的通信
+        父组件中通过provide来提供变量。子组件中通过inject来注入变量
+    6、状态管理-vuex
+        Mutation集合：声明一系列方法 操作修改state中的值 .....
 
 ## 十一、.vue文件代码模板
 ``` bash
