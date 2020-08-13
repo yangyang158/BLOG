@@ -20,17 +20,25 @@ tags:
 | :------ | :------ |:---|
 | Cache-Control: max-age=60|相对时间,60s之后过期(相对于请求时间), 优先级>Expires| 200 (from disk cache)|
 | Expires: Tue, 08 Jan 2019 06:47:35 GMT | 缓存过期的时间（绝对时间，以服务器上的时间为准)|200 (from disk cache）|
+
+区别：
+Expires 是http1.0的产物，Cache-Control是http1.1的产物两者同时存在的话，Cache-Control优先级高于Expires,
+Expires其实是过时的产物，现阶段它的存在只是一种兼容性的写法
 2、协商缓存
 
 | Response  |Request | 解释 | 响应
 | :------ | :------ |:---|
 | Last-Modified: Mon, 19 Nov 2012 08:38:01 GMT|If-Modified-Since: Mon, 19 Nov 2012 08:38:01 GMT|服务器端文件的最后修改时间|304(Not Modified)|
 | ETag: "20b1add7ec1cd1:0" |If-None-Match: "20b1add7ec1cd1:0" |服务器端文件的Etag值 |304(Not Modified)|
+在精确度上，Etag要优于Last-Modified，Last-Modified的时间单位是秒，如果某个文件在1秒内改变了多次，那么他们的Last-Modified其实并没有体现出来修改，但是Etag每次都会改变确保了精度
+在性能上，Etag要逊于Last-Modified，毕竟Last-Modified只需要记录时间，而Etag需要服务器通过算法来计算出一个hash值。
+在优先级上，服务器校验优先考虑Etag。
+所以，两者互补
 * 例子
-   1. 客户端请求一个页面 A。
-   2. 服务器返回页面A，并在给A加上一个Last-Modified/ETag。
+   1. 客户端首次请求一个页面 A。
+   2. 服务器返回页面A，并在response header上加一个Last-Modified/ETag。
    3. 客户端展现该页面，并将页面连同Last-Modified/ETag一起缓存。
-   4. 客户再次请求页面A，并将上次请求时服务器返回的Last-Modified/ETag(以请求头If-Modified-Since／If-None-Match的形式)一起传递给服务器。
+   4. 客户再次请求页面A，并将上次请求时服务器返回的Last-Modified/ETag(以请求头If-Modified-Since／If-None-Match的形式), 通过request header一起传递给服务器。
    5. 服务器检查该Last-Modified或ETag，判断是否过期。
 
 ## 实现原理
