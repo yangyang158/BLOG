@@ -9,7 +9,11 @@ tags:
 防御： 
     1、HttpOnly Cookie
     2、不信任用户输入, 对特殊字符进行转义
-    3、建立白名单, 配置规则, 告诉浏览器可以加载和执行哪些资源, 设置meta标签的方式 或 HTTP Header 中的 Content-Security-Policy
+    3、建立白名单, 配置规则, 告诉浏览器可以加载和执行哪些资源, Content-Security-Policy(csp)
+    开启该规则有两种方式
+        1、设置meta标签<meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:">
+        2、给header设置Content-Security-Policy字段
+场景：当你的脚本被上传到服务端(存在数据库或者缓存中，常见于评论等功能)，当其他人请求此资源时，服务端就会将此脚本下发至客户端，客服端收到请求后，就会自动执行此脚本。
 
 ## 二、CSRF(Cross Site Request Forgery)，即跨站请求伪造
 原理: 盗用了用户的身份, 以用户的名义发请求
