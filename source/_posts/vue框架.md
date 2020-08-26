@@ -231,3 +231,85 @@ tags:
         }
     </style>
 ```
+
+## 十二、页面跳转传参
+    1、location.href
+    2、link或a标签
+    3、this.$route.push(
+        name: 'page1',
+        params: {
+            id: 1723
+        }
+    )
+    4、this.$route.push(
+        path: 'page1',
+        query: {
+            id: 1723
+        }
+    )
+    params和query的区别：
+    a、query用path引入, url地址显示为：http://localhost:8080/page1?id=1723, 页面大刷新 数据不会丢失
+    b、params用name引入, url地址显示为：http://localhost:8080/page1, 页面大刷新 数据会丢失
+## 十三、vuex——管理共享数据
+    核心模块：
+    state：定义变量，保存数据
+    getters：定义一系列方法, 方法的作用类似computed
+    mutations：定义一系列更改state数据的回调方法, 不可以含异步回调
+    action: 定义一系列更改state数据的回调方法, 可以含异步回调
+
+    dispatch('方法名') 会触发action里面的方法
+    commit('方法名') 会触发mutations里面的方法
+``` bash
+    //main.js
+    const store = new Vuex.Store({
+    state:{
+        products: [
+            {name: '鼠标', price: 20},
+            {name: '键盘', price: 40},
+            {name: '耳机', price: 60},
+            {name: '显示屏', price: 80}
+        ]
+    },
+    getters: {
+        saleProducts: (state) => {
+            let saleProducts = state.products.map( product => {
+                return {
+                name: product.name,
+                price: product.price / 2
+                }
+            })
+            return saleProducts;
+        }
+    },
+    mutations:{
+        minusPrice (state, payload ) {
+            let newPrice = state.products.forEach( product => {
+                product.price -= payload
+            })
+        }
+    },
+    actions:{ //添加actions
+        minusPriceAsync( context, payload ) {
+            setTimeout( () => {
+                context.commit( 'minusPrice', payload ); //context提交
+            }, 2000)
+        }
+    }
+    })
+    // page.vue
+    export default {
+        data () {
+            return {
+                products: this.$store.state.products
+            }
+        },
+        methods: {
+            minusPrice() {
+                this.$store.commit('minusPrice', 2);
+            },
+            minusPriceAsync() {
+                this.$store.dispatch('minusPriceAsync', 5); //分发actions中的minusPriceAsync这个异步函数
+            }
+        }
+    }
+```
