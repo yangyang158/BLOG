@@ -12,14 +12,14 @@ tags:
     eg：<p :title="message">热烈欢迎</p>
     eg：<p :title="index === 0 ? '我是title' : ''">热烈欢迎</p>
 ## 二、条件渲染
-    1、控制元素显示与隐藏: 使用v-if、v-else、v-else-if
+    1、控制元素显示与隐藏(dom节点不会生成): 使用v-if、v-else、v-else-if
     eg：
     <div>
         <div v-if="num > 5">{{num}}大于5</div>
         <div v-else-if="num > 2">{{num}}大于2小于5</div>
         <div v-else>{{num}}小于2</div>
     </div>
-    2、控制元素显示与隐藏: v-show
+    2、控制元素显示与隐藏(dom节点会生成，通过display为none或block进行隐藏): v-show
     eg: 
     <p v-show="false">隐藏</p>
     <p v-show="true">显示</p>
@@ -63,7 +63,7 @@ tags:
     v-on:click.prevent
     v-on:click.capture
 ## 五、表单与业务数据的双向绑定
-    使用: v-modal
+    使用: v-model
     eg:
     <div>
         <p>{{ test }}</p>
@@ -106,7 +106,7 @@ tags:
     我们可以使用 methods 来替代 computed，效果上两个都是一样的，但是 computed 是基于它的依赖缓存，只有相关依赖发生改变时才会重新取值。而使用 methods ，在重新渲染的时候，函数总会重新调用执行。
 
 ## 七、监听属性watch
-    eg：监听数据变化, 做出响应
+    eg：监听数据变化, 执行对应操作
     <template>
         <div>
             <input v-model="meters" type="text">米
@@ -234,22 +234,27 @@ tags:
 
 ## 十二、页面跳转传参
     1、location.href
-    2、link或a标签
-    3、this.$route.push(
-        name: 'page1',
+    2、router-link或a标签
+    3、this.$router.push({
+        name: 'page1', // 用path接的话，获取不到参数
         params: {
             id: 1723
         }
-    )
-    4、this.$route.push(
-        path: 'page1',
+    })
+    4、this.$router.push({
+        path: '/main/role',// 或者name: 'Role
         query: {
             id: 1723
         }
-    )
+    })
+    在页面里通过this.$route获取url的参数
     params和query的区别：
-    a、query用path引入, url地址显示为：http://localhost:8080/page1?id=1723, 页面大刷新 数据不会丢失
+    a、query用path或name引入, url地址显示为：http://localhost:8080/page1?id=1723, 页面大刷新 数据不会丢失
     b、params用name引入, url地址显示为：http://localhost:8080/page1, 页面大刷新 数据会丢失
+
+    route和router的区别：
+    a、route：获取当前页面的路由信息，解析参数
+    b、router：是全局路由VueRouter的一个实例，可以跳转页面
 ## 十三、vuex——管理共享数据
     核心模块：
     state：定义变量，保存数据
@@ -313,3 +318,48 @@ tags:
         }
     }
 ```
+## 十四、vue 双向绑定的原理
+通过重写Object.defineProperty的set和get方法去更改属性值。
+
+    let Person = {}
+    Object.defineProperty(Person, 'name', {
+        value: '杨洋'
+    })
+    Person.name = '小刚'
+    // Person = {name: '杨洋'} name值不可改
+    // delete Person.name  false 不能删除
+    // Object.keys(Person) []
+    Object.defineProperty(Person, 'name', {
+        value: '杨洋',
+        writable: true,
+        configurable: true,
+        enumerable: true
+    }) 
+    Person.name = '小红'
+    // Person = {name: '小红'} name值可改
+    // Object.keys(Person) ['name']
+    // delete Person.name  true 可删除
+    let age = 12
+    Object.defineProperty(Person, 'age', {
+        writable: true,
+        get: function() { 
+            console.log('获取属性值')
+            return value 
+        },
+        set: function(value ) { 
+            console.log('设置属性值', value)
+            age = value 
+        },
+    }) 
+    // Person.age  12
+    Person.age = 80
+    // Person.age  80
+
+| 描述符 | 作用 | 默认值
+| :------ | :------ |:---|
+|writable|属性值是否可修改|false
+|value|设置属性值|undefined
+|configurable |属性值是否可删除、可配置|false
+|enumerable |描述属性是否会出现在for in 或者 Object.keys()的遍历中|false
+|get |获取属性值|undefined
+|set |设置属性值|undefined

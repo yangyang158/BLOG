@@ -129,17 +129,6 @@ tags:
         if (typeof onRejected !== 'function') {
             onRejected = () => self.value
         }
-        function parse(result, resolve, reject) {
-            try {
-                if (result instanceof MyPromise) {
-                    result.then(resolve, reject)
-                } else {
-                    resolve(result)
-                }
-            } catch(err) {
-                reject(err)
-            }
-        }
         return new MyPromise(function(resolve, reject){
             if ( self.status === 'pedding') {
                 self.callback.push({
