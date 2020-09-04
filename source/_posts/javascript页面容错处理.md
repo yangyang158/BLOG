@@ -4,6 +4,7 @@ date: 2020-06-03 14:56:56
 tags:
 ---
 
+
 ### 一、js脚本运行出错，导致页面空白，可以监听error事件定位错误
     window.onerror = handleErr
     var txt = ""
@@ -37,3 +38,5 @@ tags:
     当引入的第三方脚本发生错误时, 该脚本中的 window.onerror 会将这类错误统一展示为 Script error 。所以为了解决这个问题一般有两种解决方案：
     a、后端配置 Access-Control-Allow-origin、前端在 script 标签配置 crossorigin
     b、劫持原生方法，使用 try/catch 绕过，将错误抛出
+
+### 四、将错误信息传给后台，保存到服务器上，在查看日志
