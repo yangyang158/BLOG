@@ -18,12 +18,18 @@ tags:
 
 | Response | 解释 | 响应
 | :------ | :------ |:---|
-| Cache-Control: max-age=60|相对时间,60s之后过期(相对于请求时间), 优先级>Expires| 200 (from disk cache)|
-| Expires: Tue, 08 Jan 2019 06:47:35 GMT | 缓存过期的时间（绝对时间，以服务器上的时间为准)|200 (from disk cache）|
+| Cache-Control: max-age=60|相对时间,60s之后过期(相对于请求时间), 优先级>Expires| 200 (from disk cache or from memory cache)|
+| Expires: Tue, 08 Jan 2019 06:47:35 GMT | 缓存过期的时间（绝对时间，以服务器上的时间为准)|200 (from disk cache or from memory cache）|
 
 区别：
 Expires 是http1.0的产物，Cache-Control是http1.1的产物两者同时存在的话，Cache-Control优先级高于Expires,
 Expires其实是过时的产物，现阶段它的存在只是一种兼容性的写法
+from disk cache 和 from memory cache的区别
+from memory cache：内存缓存, 具有时效性，读取快
+from disk cache：存在硬盘上, 持久缓存，读取慢
+浏览器读取命中强缓存资源的顺序为memory cache -> disk cache
+浏览器会把哪些文件丢进内存中？哪些丢进硬盘中？
+在浏览器中，浏览器会在js和图片等文件解析执行后直接存入内存缓存中，那么当刷新页面时只需直接从内存缓存中读取(from memory cache)；而css文件则会存入硬盘文件中，所以每次渲染页面都需要从硬盘读取缓存(from disk cache)。因为css一般不变，js脚本随时会执行，从硬盘里读取，比较慢
 2、协商缓存
 
 | Response  |Request | 解释 | 响应
